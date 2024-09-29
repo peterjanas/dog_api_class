@@ -2,14 +2,19 @@ package dk.lyngby.controller;
 
 import dk.lyngby.dao.DogDaoImpl;
 import dk.lyngby.dto.DogDto;
+import dk.lyngby.exception.ApiException;
 import dk.lyngby.model.Dog;
+import dk.lyngby.model.Message;
 import io.javalin.http.Context;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 
 public class DogControllerImpl implements DogController {
 
+    private final Logger log = LoggerFactory.getLogger(DogControllerImpl.class);
     private final DogDaoImpl dogDaoImpl;
 
     public DogControllerImpl(DogDaoImpl dogDaoImpl) {
@@ -44,6 +49,9 @@ public class DogControllerImpl implements DogController {
     @Override
     public void createDog(Context ctx) {
             // == request ==
+
+        try
+        {
             DogDto dogDto = ctx.bodyAsClass(DogDto.class);
 
             // == querying ==
@@ -52,6 +60,11 @@ public class DogControllerImpl implements DogController {
 
             // == response ==
             ctx.res().setStatus(201);
+        } catch (Exception e)
+        {
+            log.error("400 {}", e.getMessage());
+            throw new ApiException(400, e.getMessage());
+        }
     }
 
     @Override

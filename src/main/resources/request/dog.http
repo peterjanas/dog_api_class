@@ -1,0 +1,30 @@
+### Create
+POST http://localhost:7000/api/v1/dog
+Content-Type: application/json
+
+{
+        "dogNamen": "Rex",
+        "dogAge": 3,
+        "dogBreed": "LABRADOR",
+        "dogGender": "MALE"
+}
+
+### Get all poems
+GET http://localhost:7000/api/v1/dog
+
+### Get a specific poem by ID
+GET http://localhost:7000/api/v1/dog/1
+
+### Update a poem by ID
+PUT http://localhost:7000/api/v1/dog/5
+Content-Type: application/json
+
+{
+  "dogName": "Betina",
+  "dogAge": 3,
+  "dogBreed": "LABRADOR",
+  "dogGender": "MALE"
+}
+
+### Delete a poem by ID
+DELETE http://localhost:7000/api/v1/dog/1

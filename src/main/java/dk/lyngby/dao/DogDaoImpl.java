@@ -43,6 +43,8 @@ public class DogDaoImpl implements DogDao {
             dog.setDogName(updateDog.getDogName());
             dog.setDogBreed(updateDog.getDogBreed());
             dog.setDogAge(updateDog.getDogAge());
+            dog.setDogGender(updateDog.getDogGender());
+            em.merge(dog);
             em.getTransaction().commit();
         }
     }
